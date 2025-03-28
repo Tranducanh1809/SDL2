@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1743090234 source:c:\users\ngoc\downloads\sdl2\main.cpp
+1743184370 source:c:\users\ngoc\downloads\sdl2\main.cpp
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
 	<vector>
+	<algorithm>
 	<cstdlib>
 	<ctime>
-	<algorithm>
 
 1739602855 c:\users\ngoc\downloads\sdl2-devel-2.30.0-mingw\sdl2-2.30.0\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
