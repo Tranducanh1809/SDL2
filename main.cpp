@@ -292,11 +292,18 @@ public:
     SDL_Texture* wallTexture;
     SDL_Texture* whiteBrickTexture;
     SDL_Texture* waterTexture;
+    SDL_Texture* gameOverTexture;
+    SDL_Texture* youWinTexture;
+    SDL_Texture* menuTexture;
     bool running;
     vector<Wall> walls;
     vector<Bullet> bullets;
     PlayTank* player;
     vector<EnemyTank> enemies;
+    enum GameState { PLAYING, WIN, LOSE, MENU };
+    GameState gameState;
+    Uint32 gameOverStartTime;
+    Uint32 winStartTime;
 
     Game() {
         running = true;
@@ -306,11 +313,11 @@ public:
         wallTexture = IMG_LoadTexture(renderer, "red_brick.png");
         whiteBrickTexture = IMG_LoadTexture(renderer, "white_brick.png");
         waterTexture = IMG_LoadTexture(renderer, "water.png");
-        generateWalls();
-        player = new PlayTank(SCREEN_WIDTH / 2, SCREEN_HEIGHT - TILE_SIZE * 2, renderer, &walls, &bullets);
-
-        srand(time(0)); // Khởi tạo seed cho rand()
-        generateRandomEnemies();
+        gameOverTexture = IMG_LoadTexture(renderer, "game_over.png");
+        youWinTexture = IMG_LoadTexture(renderer, "you_win.png");
+        menuTexture = IMG_LoadTexture(renderer, "menu.png");
+        gameState = MENU;
+        srand(time(0));
     }
 
   void generateWalls() {
@@ -326,13 +333,13 @@ public:
     // Bản đồ mẫu chữ "BC" lớn hơn (7x14 ô)
    string mapLayout[7] = {
 
-        "CCBBBW   WCCCCC ",
+        "CCBBBW   WCCBBC ",
         "B    B   BB    ",
         "B    B   C    ",
         "WBCCB    W    ",
         "B    B   C    ",
-        "B   WB   CCW   ",
-        "CCBBBW    CCCBB "
+        "B   WB   CBW   ",
+        "CCBBBW   BBCCBB "
     };
 
     int startX = MAP_WIDTH / 2 - 7;
@@ -352,7 +359,7 @@ public:
 }
 
   void generateRandomEnemies() {
-        for (int i = 0; i < 3; ++i) {
+        for (int i = 0; i < 4; ++i) {
             bool validPosition = false;
             int randomX, randomY;
 
@@ -416,8 +423,9 @@ void updateBullets() {
         return !b.active;
     }), bullets.end());
 
-    if (enemies.empty()) {
-        running = false;
+  if (enemies.empty() && gameState == PLAYING) {
+        gameState = WIN; // Cập nhật trạng thái khi thắng
+        running = false; // Kết thúc vòng lặp
     }
 }
 
@@ -426,7 +434,8 @@ void updateEnemyBullets() {
         enemy.updateBullets(walls, enemies);
         for (auto& bullet : enemy.bullets) {
             if (SDL_HasIntersection(&bullet.rect, &player->rect)) {
-                running = false;
+                gameState = LOSE; // Cập nhật trạng thái khi thua
+                running = false; // Kết thúc vòng lặp
                 return;
             }
         }
@@ -435,46 +444,144 @@ void updateEnemyBullets() {
 
  void updateEnemies() {
     for (auto& enemy : enemies) {
-        enemy.move(walls, enemies); // Truyền danh sách enemies và walls
+        enemy.move(walls, enemies);
         enemy.shoot();
 
         if (SDL_HasIntersection(&enemy.rect, &player->rect)) {
-            running = false;
+            gameState = LOSE; // Cập nhật trạng thái khi thua
+            running = false; // Kết thúc vòng lặp
             return;
         }
     }
 }
-   run() {
-    SDL_Event e;
-    while (running) {
-        while (SDL_PollEvent(&e)) {
-            if (e.type == SDL_QUIT) running = false;
-            player->handleEvent(e);
-        }
-        updateBullets();
-        updateEnemyBullets();
-        updateEnemies();
-
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
-
-        // Vẽ tường và nước trước
-        for (auto& wall : walls) wall.render(renderer);
-
-        // Vẽ đạn của người chơi và địch
-        for (auto& bullet : bullets) bullet.render();
-        for (auto& enemy : enemies) {
-            for (auto& bullet : enemy.bullets) {
-                bullet.render();
-            }
-        }
-
-        player->render();
-        for (auto& enemy : enemies) enemy.render();
-
-        SDL_RenderPresent(renderer);
+void renderGameOver() {
+    if (gameOverTexture) {
+        SDL_Rect gameOverRect = {SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2 - 100, 400, 200}; // Điều chỉnh vị trí và kích thước
+        SDL_RenderCopy(renderer, gameOverTexture, nullptr, &gameOverRect);
     }
 }
+void renderYouWin() {
+    if (youWinTexture) {
+        SDL_Rect youWinRect = {SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2 - 100, 400, 200}; // Điều chỉnh vị trí và kích thước
+        SDL_RenderCopy(renderer, youWinTexture, nullptr, &youWinRect);
+    }
+}
+void renderMenu() {
+        if (menuTexture) {
+            SDL_RenderCopy(renderer, menuTexture, nullptr, nullptr);
+        }
+    }
+void handleMenuEvents(SDL_Event& e) {
+        if (e.type == SDL_KEYDOWN) {
+            switch (e.key.keysym.sym) {
+                case SDLK_RETURN: // Thay đổi từ SDLK_SPACE thành SDLK_RETURN
+                    gameState = PLAYING;
+                    running = true;
+                    generateWalls();
+                    player = new PlayTank(SCREEN_WIDTH / 2, SCREEN_HEIGHT - TILE_SIZE * 2, renderer, &walls, &bullets);
+                    srand(time(0));
+                    generateRandomEnemies();
+                    break;
+                case SDLK_ESCAPE:
+                    running = false;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+ void run() {
+        SDL_Event e;
+        while (running) {
+            while (SDL_PollEvent(&e)) {
+                if (e.type == SDL_QUIT) {
+                    running = false;
+                    return;
+                }
+
+                if (e.type == SDL_KEYDOWN) { // Thêm xử lý phím ESC
+                    if (e.key.keysym.sym == SDLK_ESCAPE) {
+                        running = false;
+                        return;
+                    }
+                }
+
+                if (gameState == MENU) {
+                    handleMenuEvents(e);
+                } else {
+                    player->handleEvent(e);
+                }
+            }
+
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            SDL_RenderClear(renderer);
+
+            if (gameState == MENU) {
+                renderMenu();
+            } else if (gameState == PLAYING) {
+                updateBullets();
+                updateEnemyBullets();
+                updateEnemies();
+
+                for (auto& wall : walls) wall.render(renderer);
+
+                for (auto& bullet : bullets) bullet.render();
+                for (auto& enemy : enemies) {
+                    for (auto& bullet : enemy.bullets) {
+                        bullet.render();
+                    }
+                }
+
+                player->render();
+                for (auto& enemy : enemies) enemy.render();
+            } else if (gameState == WIN) {
+                renderYouWin();
+                if (winStartTime == 0) {
+                    winStartTime = SDL_GetTicks();
+                }
+                if (SDL_GetTicks() - winStartTime > 1000) {
+                    gameState = MENU;
+                    running = false;
+                }
+            } else if (gameState == LOSE) {
+                renderGameOver();
+                if (gameOverStartTime == 0) {
+                    gameOverStartTime = SDL_GetTicks();
+                }
+                if (SDL_GetTicks() - gameOverStartTime > 1000) {
+                    gameState = MENU;
+                    running = false;
+                }
+            }
+
+            SDL_RenderPresent(renderer);
+        }
+
+        if (gameState != MENU) {
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            SDL_RenderClear(renderer);
+
+            if (gameState == WIN) {
+                renderYouWin();
+            } else if (gameState == LOSE) {
+                renderGameOver();
+            }
+
+            SDL_RenderPresent(renderer);
+            SDL_Delay(1000);
+            gameState = MENU;
+            running = true;
+            walls.clear();
+            bullets.clear();
+            enemies.clear();
+            delete player;
+            player = nullptr;
+            winStartTime = 0;
+            gameOverStartTime = 0;
+            run();
+        }
+    }
 };
 
 int main(int argc, char* argv[]) {
