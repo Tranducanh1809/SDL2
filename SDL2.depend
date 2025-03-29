@@ -1,12 +1,13 @@
 # depslib dependency file v1.0
-1743246177 source:c:\users\ngoc\downloads\sdl2\main.cpp
-	<iostream>
+1743269998 source:c:\users\ngoc\downloads\sdl2\main.cpp
 	<SDL.h>
 	<SDL_image.h>
-	<vector>
+	<SDL_mixer.h>
 	<algorithm>
 	<cstdlib>
 	<ctime>
+	<iostream>
+	<vector>
 
 1739602855 c:\users\ngoc\downloads\sdl2-devel-2.30.0-mingw\sdl2-2.30.0\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -400,4 +401,58 @@
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
+
+1743269886 source:c:\users\ngoc\downloads\sdl2\bullet.cpp
+	"bullet.h"
+	<iostream>
+
+1743269886 c:\users\ngoc\downloads\sdl2\bullet.h
+	<SDL.h>
+	<SDL_image.h>
+
+1743268923 source:c:\users\ngoc\downloads\sdl2\enemytank.cpp
+	"enemytank.h"
+	<cstdlib>
+	<algorithm>
+
+1743268923 c:\users\ngoc\downloads\sdl2\enemytank.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<vector>
+	"wall.h"
+	"bullet.h"
+
+1743269886 c:\users\ngoc\downloads\sdl2\wall.h
+	<SDL.h>
+
+1743267372 c:\users\ngoc\downloads\sdl2\game.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<vector>
+	"wall.h"
+	"bullet.h"
+	"playtank.h"
+	"enemytank.h"
+
+1743267751 c:\users\ngoc\downloads\sdl2\playtank.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<vector>
+	"wall.h"
+	"bullet.h"
+
+1743267536 source:c:\users\ngoc\downloads\sdl2\playtank.cpp
+	"playtank.h"
+	<iostream>
+	<SDL_image.h>
+
+1743269886 source:c:\users\ngoc\downloads\sdl2\wall.cpp
+	"wall.h"
+
+1743267411 source:c:\users\ngoc\downloads\sdl2\game.cpp
+	"playtank.h"
+	<iostream>
 
