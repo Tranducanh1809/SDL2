@@ -326,13 +326,13 @@ public:
     // Bản đồ mẫu chữ "BC" lớn hơn (7x14 ô)
    string mapLayout[7] = {
 
-        "BBBBBW   WCCCCC ",
-        "B    B   CC    ",
+        "CCBBBW   WCCCCC ",
+        "B    B   BB    ",
         "B    B   C    ",
-        "WBBBB    W    ",
+        "WBCCB    W    ",
         "B    B   C    ",
-        "B    B   CCW   ",
-        "BBBBBW    CCCCC "
+        "B   WB   CCW   ",
+        "CCBBBW    CCCBB "
     };
 
     int startX = MAP_WIDTH / 2 - 7;
