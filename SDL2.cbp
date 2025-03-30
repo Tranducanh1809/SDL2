@@ -45,7 +45,18 @@
 		<ExtraCommands>
 			<Add after="XCOPY $(#sdl2)\bin\*.dll $(TARGET_OUTPUT_DIR) /D /Y" />
 		</ExtraCommands>
+		<Unit filename="Bullet.cpp" />
+		<Unit filename="Bullet.h" />
+		<Unit filename="EnemyTank.cpp" />
+		<Unit filename="EnemyTank.h" />
+		<Unit filename="PlayTank.cpp" />
+		<Unit filename="PlayTank.h" />
+		<Unit filename="constants.h" />
+		<Unit filename="game.cpp" />
+		<Unit filename="game.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="wall.cpp" />
+		<Unit filename="wall.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

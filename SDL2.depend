@@ -1,13 +1,6 @@
 # depslib dependency file v1.0
-1743269998 source:c:\users\ngoc\downloads\sdl2\main.cpp
-	<SDL.h>
-	<SDL_image.h>
-	<SDL_mixer.h>
-	<algorithm>
-	<cstdlib>
-	<ctime>
-	<iostream>
-	<vector>
+1743308620 source:c:\users\ngoc\downloads\sdl2\main.cpp
+	"Game.h"
 
 1739602855 c:\users\ngoc\downloads\sdl2-devel-2.30.0-mingw\sdl2-2.30.0\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -402,57 +395,179 @@
 	"begin_code.h"
 	"close_code.h"
 
-1743269886 source:c:\users\ngoc\downloads\sdl2\bullet.cpp
-	"bullet.h"
-	<iostream>
+1743308620 source:c:\users\ngoc\downloads\sdl2\bullet.cpp
+	"Bullet.h"
 
-1743269886 c:\users\ngoc\downloads\sdl2\bullet.h
+1743308620 c:\users\ngoc\downloads\sdl2\bullet.h
+	"constants.h"
 	<SDL.h>
 	<SDL_image.h>
+	<iostream>
 
-1743268923 source:c:\users\ngoc\downloads\sdl2\enemytank.cpp
-	"enemytank.h"
-	<cstdlib>
+1743313174 source:c:\users\ngoc\downloads\sdl2\enemytank.cpp
+	"EnemyTank.h"
 	<algorithm>
 
-1743268923 c:\users\ngoc\downloads\sdl2\enemytank.h
+1743308620 c:\users\ngoc\downloads\sdl2\enemytank.h
+	"Bullet.h"
+	"Wall.h"
+	"constants.h"
+	<SDL.h>
+	<SDL_image.h>
+	<vector>
+
+1743308620 c:\users\ngoc\downloads\sdl2\wall.h
+	<SDL.h>
+
+1743308620 c:\users\ngoc\downloads\sdl2\game.h
+	"Bullet.h"
+	"EnemyTank.h"
+	"PlayTank.h"
+	"Wall.h"
+	"constants.h"
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
 	<vector>
-	"wall.h"
-	"bullet.h"
 
-1743269886 c:\users\ngoc\downloads\sdl2\wall.h
-	<SDL.h>
-
-1743267372 c:\users\ngoc\downloads\sdl2\game.h
+1743308620 c:\users\ngoc\downloads\sdl2\playtank.h
+	"Bullet.h"
+	"Wall.h"
+	"constants.h"
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
 	<vector>
-	"wall.h"
-	"bullet.h"
-	"playtank.h"
-	"enemytank.h"
 
-1743267751 c:\users\ngoc\downloads\sdl2\playtank.h
+1743308620 source:c:\users\ngoc\downloads\sdl2\playtank.cpp
+	"PlayTank.h"
+
+1743313305 source:c:\users\ngoc\downloads\sdl2\wall.cpp
+	"Wall.h"
+	"constants.h"
+
+1743313196 source:c:\users\ngoc\downloads\sdl2\game.cpp
+	"Game.h"
+	<algorithm>
+	<ctime>
+
+1743308620 c:\users\ngoc\downloads\sdl2\constants.h
+
+1743308620 source:c:\users\cun\desktop\sdl2\bullet.cpp
+	"Bullet.h"
+
+1743308620 c:\users\cun\desktop\sdl2\bullet.h
+	"constants.h"
 	<SDL.h>
 	<SDL_image.h>
-	<SDL_mixer.h>
-	<vector>
-	"wall.h"
-	"bullet.h"
-
-1743267536 source:c:\users\ngoc\downloads\sdl2\playtank.cpp
-	"playtank.h"
 	<iostream>
+
+1743308620 c:\users\cun\desktop\sdl2\constants.h
+
+1743308620 source:c:\users\cun\desktop\sdl2\main.cpp
+	"Game.h"
+
+1743308620 c:\users\cun\desktop\sdl2\game.h
+	"Bullet.h"
+	"EnemyTank.h"
+	"PlayTank.h"
+	"Wall.h"
+	"constants.h"
+	<SDL.h>
 	<SDL_image.h>
+	<SDL_mixer.h>
+	<vector>
 
-1743269886 source:c:\users\ngoc\downloads\sdl2\wall.cpp
-	"wall.h"
+1743308620 c:\users\cun\desktop\sdl2\enemytank.h
+	"Bullet.h"
+	"Wall.h"
+	"constants.h"
+	<SDL.h>
+	<SDL_image.h>
+	<vector>
 
-1743267411 source:c:\users\ngoc\downloads\sdl2\game.cpp
-	"playtank.h"
+1743308620 c:\users\cun\desktop\sdl2\wall.h
+	<SDL.h>
+
+1743308620 c:\users\cun\desktop\sdl2\playtank.h
+	"Bullet.h"
+	"Wall.h"
+	"constants.h"
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<vector>
+
+1743308620 source:c:\users\cun\desktop\sdl2\playtank.cpp
+	"PlayTank.h"
+
+1743313174 source:c:\users\cun\desktop\sdl2\enemytank.cpp
+	"EnemyTank.h"
+	<algorithm>
+
+1743313196 source:c:\users\cun\desktop\sdl2\game.cpp
+	"Game.h"
+	<algorithm>
+	<ctime>
+
+1743308620 source:c:\users\ngoc\downloads\sdl2\sdl2\bullet.cpp
+	"Bullet.h"
+
+1743308620 c:\users\ngoc\downloads\sdl2\sdl2\bullet.h
+	"constants.h"
+	<SDL.h>
+	<SDL_image.h>
 	<iostream>
+
+1743308620 c:\users\ngoc\downloads\sdl2\sdl2\constants.h
+
+1743313174 source:c:\users\ngoc\downloads\sdl2\sdl2\enemytank.cpp
+	"EnemyTank.h"
+	<algorithm>
+
+1743308620 c:\users\ngoc\downloads\sdl2\sdl2\enemytank.h
+	"Bullet.h"
+	"Wall.h"
+	"constants.h"
+	<SDL.h>
+	<SDL_image.h>
+	<vector>
+
+1743308620 c:\users\ngoc\downloads\sdl2\sdl2\wall.h
+	<SDL.h>
+
+1743313196 source:c:\users\ngoc\downloads\sdl2\sdl2\game.cpp
+	"Game.h"
+	<algorithm>
+	<ctime>
+
+1743308620 c:\users\ngoc\downloads\sdl2\sdl2\game.h
+	"Bullet.h"
+	"EnemyTank.h"
+	"PlayTank.h"
+	"Wall.h"
+	"constants.h"
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<vector>
+
+1743308620 c:\users\ngoc\downloads\sdl2\sdl2\playtank.h
+	"Bullet.h"
+	"Wall.h"
+	"constants.h"
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<vector>
+
+1743308620 source:c:\users\ngoc\downloads\sdl2\sdl2\main.cpp
+	"Game.h"
+
+1743308620 source:c:\users\ngoc\downloads\sdl2\sdl2\playtank.cpp
+	"PlayTank.h"
+
+1743313305 source:c:\users\ngoc\downloads\sdl2\sdl2\wall.cpp
+	"Wall.h"
+	"constants.h"
 
